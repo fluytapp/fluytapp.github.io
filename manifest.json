@@ -1,0 +1,32 @@
+{
+  "name": "Fluyt — Mensajería instantánea",
+  "short_name": "Fluyt",
+  "description": "La app de mensajería n°1 de 2026: chats en tiempo real, caja fuerte, IA Gemini y más.",
+  "start_url": "https://fluytapp.github.io/",
+  "scope": "https://fluytapp.github.io/",
+  "id": "https://fluytapp.github.io/",
+  "display": "standalone",
+  "orientation": "portrait-primary",
+  "background_color": "#03080e",
+  "theme_color": "#03080e",
+  "lang": "es-ES",
+  "dir": "ltr",
+  "categories": ["social", "communication", "productivity"],
+  "icons": [
+    { "src": "/assets/img/fluyt-192.png", "sizes": "192x192", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/img/fluyt-512.png", "sizes": "512x512", "type": "image/png", "purpose": "any" },
+    { "src": "/assets/img/fluyt-512-maskable.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+  ],
+  "shortcuts": [
+    {
+      "name": "Descargar APK",
+      "url": "/#descargar",
+      "description": "Descargar Fluyt para Android"
+    },
+    {
+      "name": "Abrir versión web",
+      "url": "https://fluytweb.netlify.app",
+      "description": "Usar Fluyt desde el navegador"
+    }
+  ]
+}

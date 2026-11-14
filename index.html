@@ -1,0 +1,1190 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fluyt — Mensajería instantánea</title>
+  <meta name="description" content="Fluyt, la app de mensajería n°1 de 2026. Chats en tiempo real, caja fuerte, IA, rachas y más. Descarga el APK de Android o usa la versión web.">
+  <meta name="keywords" content="Fluyt, mensajería instantánea, chat en tiempo real, app de chat, IA Gemini, Niggi, caja fuerte, aXolotl Team, César Frontiñán, APK Android, mensajería web, Fluyt 3.5">
+  <meta name="author" content="César Frontiñán · aXolotl Team">
+  <meta name="robots" content="index, follow, max-image-preview:large">
+  <link rel="canonical" href="https://fluytapp.github.io/">
+  <meta name="theme-color" content="#03080e">
+
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Fluyt">
+  <meta property="og:title" content="Fluyt — La app de mensajería n°1 de 2026">
+  <meta property="og:description" content="Chats en tiempo real, caja fuerte privada, Niggi IA con Gemini y sistema de recompensas. Descarga el APK o usa la versión web.">
+  <meta property="og:image" content="https://fluytapp.github.io/assets/img/fluyt.png">
+  <meta property="og:url" content="https://fluytapp.github.io/">
+  <meta property="og:locale" content="es_ES">
+
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Fluyt — La app de mensajería n°1 de 2026">
+  <meta name="twitter:description" content="Chats en tiempo real, caja fuerte privada, IA con Gemini y más.">
+  <meta name="twitter:image" content="https://fluytapp.github.io/assets/img/fluyt.png">
+
+  <link rel="icon" type="image/x-icon" href="./assets/img/favicon.ico">
+  <link rel="icon" type="image/png" href="./assets/img/fluyt.png">
+  <link rel="apple-touch-icon" href="./assets/img/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="./assets/img/favicon-32x32.png">
+<link rel="icon" type="image/png" sizes="16x16" href="./assets/img/favicon-16x16.png">
+  <link rel="manifest" href="/manifest.json">
+
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "SoftwareApplication",
+        "name": "Fluyt",
+        "applicationCategory": "CommunicationApplication",
+        "operatingSystem": "Android, Web",
+        "softwareVersion": "3.5",
+        "description": "Aplicación de mensajería instantánea con chats en tiempo real, envío de archivos, IA integrada (Niggi con Gemini), sistema de recompensas y perfiles de usuario.",
+        "url": "https://fluytapp.github.io/",
+        "downloadUrl": "https://fluytapp.github.io/descargas/fluyt.apk",
+        "offers": { "@type": "Offer", "price": "0", "priceCurrency": "EUR" },
+        "author": { "@type": "Person", "name": "César Frontiñán" },
+        "publisher": { "@type": "Organization", "name": "aXolotl Team" }
+      },
+      {
+        "@type": "Organization",
+        "name": "aXolotl Team",
+        "founder": { "@type": "Person", "name": "César Frontiñán" },
+        "email": "axolotlteamapp@gmail.com",
+        "sameAs": ["https://ko-fi.com/axolotl_team"]
+      },
+      {
+        "@type": "WebSite",
+        "name": "Fluyt",
+        "url": "https://fluytapp.github.io/",
+        "inLanguage": "es-ES"
+      }
+    ]
+  }
+  </script>
+
+  <style>
+    *, *::before, *::after { box-sizing: border-box; }
+    * { margin: 0; padding: 0; }
+
+    :root {
+      --bg: #03080e;
+      --panel: #0b1624;
+      --primary: #2658ab;
+      --primary-2: #5b8eff;
+      --text: #eef3f9;
+      --muted: #9ab0d3;
+      --muted-2: #6f87ab;
+      --border: rgba(38, 88, 171, 0.22);
+      --border-hi: rgba(91, 142, 255, 0.5);
+    }
+
+    html {
+      scroll-behavior: smooth;
+      -webkit-text-size-adjust: 100%;
+      scroll-padding-top: 80px;
+    }
+
+    body {
+      background: var(--bg);
+      color: var(--text);
+      font-family: system-ui, -apple-system, 'Segoe UI', Roboto, 'Helvetica Neue', sans-serif;
+      line-height: 1.6;
+      overflow-x: hidden;
+      -webkit-font-smoothing: antialiased;
+      -moz-osx-font-smoothing: grayscale;
+    }
+
+    img { display: block; max-width: 100%; }
+    a { color: inherit; text-decoration: none; }
+    svg { display: block; }
+
+    .container { max-width: 1160px; margin: 0 auto; padding: 0 24px; }
+
+    .progress {
+      position: fixed;
+      top: 0; left: 0;
+      height: 2px;
+      width: 0%;
+      background: linear-gradient(90deg, var(--primary), var(--primary-2));
+      z-index: 300;
+      transition: width 0.06s linear;
+      box-shadow: 0 0 12px rgba(91, 142, 255, 0.7);
+    }
+
+    .nav {
+      position: fixed;
+      top: 0; left: 0; right: 0;
+      z-index: 200;
+      padding: 12px 0;
+      background: rgba(3, 8, 14, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      border-bottom: 1px solid transparent;
+      transform: translateY(-100%);
+      opacity: 0;
+      transition: transform 0.45s cubic-bezier(0.2, 0.9, 0.25, 1),
+                  opacity 0.35s ease,
+                  border-color 0.3s;
+    }
+
+    .nav.visible {
+      transform: none;
+      opacity: 1;
+      border-bottom-color: var(--border);
+    }
+
+    .nav .container {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .nav-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+      font-weight: 800;
+      letter-spacing: -0.4px;
+      font-size: 1.08rem;
+    }
+
+    .nav-brand img {
+      width: 28px; height: 28px;
+      border-radius: 8px;
+      background: #0f1a2b;
+      padding: 4px;
+      border: 1px solid var(--border);
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 26px;
+    }
+
+    .nav-links a {
+      color: #cfdaee;
+      font-size: 0.9rem;
+      font-weight: 500;
+      position: relative;
+      transition: color 0.2s;
+    }
+
+    .nav-links a:not(.nav-cta)::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -5px;
+      width: 0; height: 2px;
+      background: var(--primary-2);
+      border-radius: 2px;
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover { color: #fff; }
+    .nav-links a:not(.nav-cta):hover::after { width: 100%; }
+
+    .nav-cta {
+      background: linear-gradient(135deg, var(--primary), #1a3a7a);
+      padding: 8px 18px;
+      border-radius: 100px;
+      color: #fff !important;
+      font-weight: 700;
+      font-size: 0.86rem;
+      box-shadow: 0 8px 18px -8px var(--primary);
+      transition: transform 0.2s, box-shadow 0.2s;
+    }
+
+    .nav-cta:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 26px -8px var(--primary);
+    }
+
+    .hero {
+      --cx: 50%;
+      --cy: 30%;
+      position: relative;
+      padding: 130px 0 100px;
+      text-align: center;
+      overflow: hidden;
+      isolation: isolate;
+    }
+
+    .hero::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      z-index: -2;
+      background:
+        radial-gradient(ellipse 80% 60% at 50% 0%, rgba(38, 88, 171, 0.28), transparent 70%),
+        radial-gradient(rgba(91, 142, 255, 0.07) 1px, transparent 1px);
+      background-size: 100% 100%, 32px 32px;
+      mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 30%, transparent 85%);
+      -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 30%, black 30%, transparent 85%);
+    }
+
+    .hero-spot {
+      position: absolute;
+      inset: 0;
+      z-index: -1;
+      pointer-events: none;
+      background: radial-gradient(circle 450px at var(--cx) var(--cy),
+                                  rgba(91, 142, 255, 0.14), transparent 60%);
+      opacity: 0;
+      transition: opacity 0.5s ease;
+    }
+
+    .hero:hover .hero-spot { opacity: 1; }
+
+    .orb {
+      position: absolute;
+      border-radius: 50%;
+      filter: blur(80px);
+      z-index: -1;
+      pointer-events: none;
+    }
+
+    .orb-1 {
+      width: 480px; height: 480px;
+      background: rgba(38, 88, 171, 0.32);
+      top: -160px; left: 8%;
+      animation: float 22s ease-in-out infinite;
+    }
+
+    .orb-2 {
+      width: 360px; height: 360px;
+      background: rgba(91, 142, 255, 0.18);
+      top: 60px; right: 5%;
+      animation: float 26s ease-in-out infinite reverse;
+    }
+
+    @keyframes float {
+      0%, 100% { transform: translate(0, 0) scale(1); }
+      50%      { transform: translate(30px, -40px) scale(1.1); }
+    }
+
+    .hero-logo-wrap {
+      display: flex;
+      justify-content: center;
+      margin-bottom: 24px;
+      animation: riseIn 0.9s cubic-bezier(0.2, 0.9, 0.25, 1) both;
+    }
+
+    .hero-logo {
+      width: clamp(76px, 11vw, 108px);
+      height: clamp(76px, 11vw, 108px);
+      border-radius: 26px;
+      background: linear-gradient(135deg, #12213a, #060f1c);
+      padding: 16px;
+      border: 1px solid var(--border);
+      box-shadow:
+        0 25px 60px -20px rgba(38, 88, 171, 0.7),
+        inset 0 0 0 1px rgba(255, 255, 255, 0.03);
+      animation: bob 6s ease-in-out infinite;
+    }
+
+    @keyframes bob {
+      0%, 100% { transform: translateY(0); }
+      50%      { transform: translateY(-6px); }
+    }
+
+    .hero-title { font-weight: 400; }
+
+    .hero-wordmark {
+      display: block;
+      font-size: clamp(4.5rem, 15vw, 12rem);
+      font-weight: 900;
+      line-height: 0.9;
+      letter-spacing: -0.06em;
+      background: linear-gradient(120deg,
+        #ffffff 0%, #cfe0ff 25%, #5b8eff 50%, #cfe0ff 75%, #ffffff 100%);
+      background-size: 200% auto;
+      -webkit-background-clip: text;
+      background-clip: text;
+      -webkit-text-fill-color: transparent;
+      animation: shimmer 6s ease-in-out infinite alternate,
+                 riseIn 1s cubic-bezier(0.2, 0.9, 0.25, 1) 0.15s both;
+      word-break: keep-all;
+    }
+
+    @keyframes shimmer {
+      from { background-position: 0% 50%; }
+      to   { background-position: 100% 50%; }
+    }
+
+    .hero-tagline {
+      display: block;
+      margin-top: 20px;
+      font-size: clamp(1.15rem, 2.4vw, 1.5rem);
+      font-weight: 500;
+      color: #b8ceff;
+      letter-spacing: -0.3px;
+      animation: riseIn 0.9s cubic-bezier(0.2, 0.9, 0.25, 1) 0.3s both;
+    }
+
+    .hero-tagline em {
+      font-style: normal;
+      color: var(--primary-2);
+      font-weight: 800;
+    }
+
+    .hero-desc {
+      max-width: 700px;
+      margin: 28px auto 0;
+      font-size: clamp(0.98rem, 1.4vw, 1.06rem);
+      color: var(--muted);
+      line-height: 1.7;
+      animation: riseIn 0.9s cubic-bezier(0.2, 0.9, 0.25, 1) 0.45s both;
+    }
+
+    .hero-desc strong { color: #dfeaff; font-weight: 600; }
+
+    .hero-ctas {
+      display: flex;
+      gap: 14px;
+      justify-content: center;
+      margin-top: 40px;
+      flex-wrap: wrap;
+      animation: riseIn 0.9s cubic-bezier(0.2, 0.9, 0.25, 1) 0.6s both;
+    }
+
+    @keyframes riseIn {
+      from { opacity: 0; transform: translateY(26px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 13px 26px;
+      border-radius: 100px;
+      font-weight: 700;
+      font-size: 0.95rem;
+      cursor: pointer;
+      border: 1px solid transparent;
+      transition: transform 0.22s ease, box-shadow 0.25s ease,
+                  background 0.2s, border-color 0.2s;
+      -webkit-tap-highlight-color: transparent;
+    }
+
+    .btn svg { transition: transform 0.25s ease; }
+    .btn:hover svg { transform: translateY(2px); }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--primary), #1a3a7a);
+      color: #fff;
+      box-shadow: 0 14px 30px -12px var(--primary),
+                  inset 0 1px 0 rgba(255, 255, 255, 0.1);
+    }
+
+    .btn-primary:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 22px 40px -12px var(--primary);
+    }
+
+    .btn-ghost {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: var(--border);
+      color: #dfeaff;
+    }
+
+    .btn-ghost:hover {
+      background: rgba(38, 88, 171, 0.15);
+      border-color: var(--border-hi);
+      transform: translateY(-3px);
+    }
+
+    .section { padding: 90px 0; position: relative; }
+
+    .section-head {
+      text-align: center;
+      max-width: 720px;
+      margin: 0 auto 56px;
+    }
+
+    .eyebrow {
+      display: inline-block;
+      font-size: 0.76rem;
+      font-weight: 700;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--primary-2);
+      margin-bottom: 14px;
+      padding: 5px 14px;
+      background: rgba(38, 88, 171, 0.15);
+      border: 1px solid var(--border);
+      border-radius: 100px;
+    }
+
+    .section-title {
+      font-size: clamp(1.85rem, 3.4vw, 2.45rem);
+      font-weight: 800;
+      letter-spacing: -0.8px;
+      line-height: 1.15;
+      margin-bottom: 14px;
+    }
+
+    .section-sub {
+      color: var(--muted);
+      font-size: 1.02rem;
+      max-width: 620px;
+      margin: 0 auto;
+    }
+
+    .featured-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .featured-card {
+      position: relative;
+      padding: 28px 24px;
+      background: linear-gradient(160deg, #0b1422, #040b14);
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      overflow: hidden;
+      transition: transform 0.3s ease, border-color 0.3s, box-shadow 0.35s;
+    }
+
+    .featured-card::before {
+      content: '';
+      position: absolute;
+      inset: 0;
+      background: radial-gradient(circle 200px at var(--mx, 50%) var(--my, 50%),
+                                  rgba(91, 142, 255, 0.16), transparent 70%);
+      opacity: 0;
+      transition: opacity 0.4s;
+      pointer-events: none;
+    }
+
+    .featured-card:hover {
+      transform: translateY(-5px);
+      border-color: var(--border-hi);
+      box-shadow: 0 24px 44px -22px #0e2b52;
+    }
+    .featured-card:hover::before { opacity: 1; }
+
+    .featured-icon {
+      width: 54px; height: 54px;
+      display: flex; align-items: center; justify-content: center;
+      border-radius: 16px;
+      background: linear-gradient(135deg, #16294a, #0c1a2e);
+      border: 1px solid #2d4b78;
+      margin-bottom: 18px;
+      color: #bcd3ff;
+      transition: transform 0.35s cubic-bezier(0.2, 0.9, 0.25, 1);
+    }
+
+    .featured-icon svg {
+      width: 24px; height: 24px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .featured-card:hover .featured-icon {
+      transform: scale(1.1) rotate(-4deg);
+    }
+
+    .featured-card h3 {
+      font-size: 1.06rem;
+      font-weight: 700;
+      margin-bottom: 6px;
+      letter-spacing: -0.2px;
+    }
+
+    .featured-card p {
+      font-size: 0.9rem;
+      color: var(--muted);
+      line-height: 1.55;
+    }
+
+    .v35-wrap {
+      position: relative;
+      padding: 52px 44px;
+      background: linear-gradient(160deg, #0b1624, #050e19);
+      border: 1px solid #1f3d66;
+      border-radius: 32px;
+      overflow: hidden;
+    }
+
+    .v35-wrap::before {
+      content: '';
+      position: absolute;
+      top: -140px; right: -120px;
+      width: 340px; height: 340px;
+      background: radial-gradient(circle, rgba(38, 88, 171, 0.32), transparent 70%);
+      border-radius: 50%;
+      pointer-events: none;
+    }
+
+    .v35-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 9px;
+      font-size: 0.8rem;
+      font-weight: 800;
+      letter-spacing: 0.4px;
+      color: #fff;
+      padding: 7px 16px;
+      border-radius: 100px;
+      background: linear-gradient(135deg, var(--primary), #1a3a7a);
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      margin-bottom: 18px;
+      box-shadow: 0 12px 26px -14px var(--primary);
+    }
+
+    .v35-badge svg {
+      width: 12px; height: 12px;
+      fill: currentColor;
+    }
+
+    .v35-lead {
+      color: var(--muted);
+      max-width: 640px;
+      font-size: 1rem;
+    }
+
+    .v35-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      margin-top: 32px;
+    }
+
+    .v35-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 18px 20px;
+      background: rgba(3, 8, 14, 0.55);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      transition: transform 0.25s ease, border-color 0.25s, background 0.25s;
+    }
+
+    .v35-item:hover {
+      transform: translateY(-3px);
+      border-color: var(--border-hi);
+      background: rgba(38, 88, 171, 0.08);
+    }
+
+    .v35-ico {
+      flex-shrink: 0;
+      width: 38px; height: 38px;
+      border-radius: 11px;
+      display: flex; align-items: center; justify-content: center;
+      background: rgba(38, 88, 171, 0.2);
+      border: 1px solid var(--border-hi);
+      color: #bcd3ff;
+    }
+
+    .v35-ico svg {
+      width: 17px; height: 17px;
+      stroke: currentColor;
+      stroke-width: 2;
+      fill: none;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .v35-item h4 {
+      font-size: 0.98rem;
+      font-weight: 700;
+      margin-bottom: 3px;
+      letter-spacing: -0.2px;
+    }
+
+    .v35-item p {
+      font-size: 0.85rem;
+      color: var(--muted-2);
+      line-height: 1.5;
+    }
+
+    .download-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 22px;
+      max-width: 880px;
+      margin: 0 auto;
+    }
+
+    .dl-card {
+      position: relative;
+      display: flex;
+      flex-direction: column;
+      padding: 32px 30px;
+      border-radius: 26px;
+      border: 1px solid rgba(255, 255, 255, 0.1);
+      overflow: hidden;
+      transition: transform 0.3s ease, box-shadow 0.35s;
+    }
+
+    .dl-android {
+      background: linear-gradient(160deg, #1a3a7a, #0d2149);
+      box-shadow: 0 20px 50px -20px rgba(38, 88, 171, 0.75);
+    }
+
+    .dl-web {
+      background: linear-gradient(160deg, #1a472a, #0d2417);
+      box-shadow: 0 20px 50px -20px rgba(30, 107, 62, 0.75);
+    }
+
+    .dl-card::before {
+      content: '';
+      position: absolute;
+      top: -50%; left: -60%;
+      width: 200%; height: 200%;
+      background: linear-gradient(45deg,
+        transparent 40%, rgba(255, 255, 255, 0.1) 50%, transparent 60%);
+      transform: translateX(-100%);
+      transition: transform 0.9s ease;
+      pointer-events: none;
+    }
+
+    .dl-card:hover { transform: translateY(-4px); }
+    .dl-card:hover::before { transform: translateX(100%); }
+    .dl-android:hover { box-shadow: 0 30px 60px -18px rgba(38, 88, 171, 0.95); }
+    .dl-web:hover    { box-shadow: 0 30px 60px -18px rgba(30, 107, 62, 0.95); }
+
+    .dl-tag {
+      position: absolute;
+      top: 14px; right: 14px;
+      font-size: 0.68rem;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      background: rgba(255, 255, 255, 0.95);
+      color: #0a1730;
+      padding: 4px 10px;
+      border-radius: 100px;
+    }
+
+    .dl-head {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+      margin-bottom: 20px;
+    }
+
+    .dl-icon {
+      width: 52px; height: 52px;
+      border-radius: 15px;
+      background: rgba(255, 255, 255, 0.14);
+      display: flex; align-items: center; justify-content: center;
+      color: #fff;
+      flex-shrink: 0;
+    }
+
+    .dl-icon svg { width: 26px; height: 26px; }
+
+    .dl-title {
+      font-size: 1.15rem;
+      font-weight: 800;
+      color: #fff;
+      line-height: 1.2;
+    }
+
+    .dl-sub {
+      font-size: 0.82rem;
+      color: rgba(255, 255, 255, 0.75);
+      margin-top: 2px;
+    }
+
+    .dl-desc {
+      font-size: 0.9rem;
+      color: rgba(255, 255, 255, 0.82);
+      line-height: 1.55;
+      margin-bottom: 22px;
+      flex: 1;
+    }
+
+    .dl-cta {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      background: rgba(255, 255, 255, 0.16);
+      padding: 10px 18px;
+      border-radius: 100px;
+      color: #fff;
+      font-weight: 700;
+      font-size: 0.88rem;
+      align-self: flex-start;
+      transition: background 0.2s, gap 0.2s;
+    }
+
+    .dl-card:hover .dl-cta { background: rgba(255, 255, 255, 0.28); gap: 12px; }
+
+    .footer {
+      padding: 40px 0;
+      border-top: 1px solid var(--border);
+      background: #02070e;
+      color: var(--muted-2);
+      font-size: 0.9rem;
+    }
+
+    .footer .container {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 20px;
+    }
+
+    .footer-brand {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+
+    .footer-brand img {
+      width: 20px; height: 20px;
+      border-radius: 5px;
+    }
+
+    .footer-links {
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+    }
+
+    .footer-links a {
+      color: #b6c8f0;
+      transition: color 0.2s;
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .footer-links a:hover { color: #fff; }
+
+    .footer-links svg {
+      width: 14px; height: 14px;
+      stroke: currentColor;
+      fill: none;
+      stroke-width: 2;
+      stroke-linecap: round;
+      stroke-linejoin: round;
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(28px);
+      transition: opacity 0.8s cubic-bezier(0.2, 0.9, 0.25, 1),
+                  transform 0.8s cubic-bezier(0.2, 0.9, 0.25, 1);
+      will-change: opacity, transform;
+    }
+    .reveal.visible { opacity: 1; transform: none; }
+
+    .reveal-stagger > * {
+      opacity: 0;
+      transform: translateY(22px);
+      transition: opacity 0.7s cubic-bezier(0.2, 0.9, 0.25, 1),
+                  transform 0.7s cubic-bezier(0.2, 0.9, 0.25, 1);
+    }
+    .reveal-stagger.visible > * { opacity: 1; transform: none; }
+    .reveal-stagger.visible > *:nth-child(1) { transition-delay: 0.00s; }
+    .reveal-stagger.visible > *:nth-child(2) { transition-delay: 0.08s; }
+    .reveal-stagger.visible > *:nth-child(3) { transition-delay: 0.16s; }
+    .reveal-stagger.visible > *:nth-child(4) { transition-delay: 0.24s; }
+    .reveal-stagger.visible > *:nth-child(5) { transition-delay: 0.32s; }
+    .reveal-stagger.visible > *:nth-child(6) { transition-delay: 0.40s; }
+    .reveal-stagger.visible > *:nth-child(7) { transition-delay: 0.48s; }
+    .reveal-stagger.visible > *:nth-child(8) { transition-delay: 0.56s; }
+
+    @media (max-width: 900px) {
+      .featured-grid { grid-template-columns: repeat(2, 1fr); }
+      .v35-grid { grid-template-columns: repeat(2, 1fr); }
+    }
+
+    @media (max-width: 720px) {
+      .nav-links a:not(.nav-cta) { display: none; }
+      .download-grid { grid-template-columns: 1fr; }
+      .v35-wrap { padding: 40px 24px; border-radius: 26px; }
+      .section { padding: 70px 0; }
+      .hero { padding: 110px 0 80px; }
+      .footer .container { flex-direction: column; text-align: center; }
+    }
+
+    @media (max-width: 560px) {
+      .featured-grid { grid-template-columns: 1fr; }
+      .v35-grid { grid-template-columns: 1fr; }
+      .hero-ctas { flex-direction: column; align-items: stretch; width: 100%; }
+      .btn { justify-content: center; }
+    }
+
+    @media (prefers-reduced-motion: reduce) {
+      *, *::before, *::after {
+        animation-duration: 0.01ms !important;
+        animation-iteration-count: 1 !important;
+        transition-duration: 0.01ms !important;
+      }
+    }
+  </style>
+</head>
+<body>
+
+  <div class="progress" aria-hidden="true"></div>
+
+  <nav class="nav" aria-label="Navegación principal">
+    <div class="container">
+      <a href="#top" class="nav-brand">
+        <img src="./assets/img/fluyt.png" alt="Fluyt">
+        <span>Fluyt</span>
+      </a>
+      <div class="nav-links">
+        <a href="#destacado">Destacado</a>
+        <a href="#novedades">v3.5</a>
+        <a href="#descargar" class="nav-cta">Descargar</a>
+      </div>
+    </div>
+  </nav>
+
+  <header class="hero" id="top">
+    <div class="hero-spot" aria-hidden="true"></div>
+    <div class="orb orb-1" aria-hidden="true"></div>
+    <div class="orb orb-2" aria-hidden="true"></div>
+
+    <div class="container">
+      <div class="hero-logo-wrap">
+        <img class="hero-logo" src="./assets/img/fluyt.png"
+             alt="Logotipo de Fluyt, app de mensajería instantánea">
+      </div>
+
+      <h1 class="hero-title">
+        <span class="hero-wordmark">Fluyt</span>
+        <span class="hero-tagline">La app de mensajería <em>n°1</em> de 2026</span>
+      </h1>
+
+      <p class="hero-desc">
+        Fluyt es una nueva herramienta de mensajería instantánea dotada de chats de
+        texto en tiempo real, envío de archivos, IA, sistema de recompensas y mucho
+        más. Desarrollada por <strong>César Frontiñán</strong> (CEO de
+        <strong>aXolotl Team</strong>), está en constante desarrollo y cuenta con
+        algunas de las funciones más innovadoras de la red.
+      </p>
+
+      <div class="hero-ctas">
+        <a href="#descargar" class="btn btn-primary">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4"/>
+            <polyline points="7 10 12 15 17 10"/>
+            <line x1="12" y1="15" x2="12" y2="3"/>
+          </svg>
+          Descargar Fluyt
+        </a>
+        <a href="https://fluyt.netlify.app" target="_blank" rel="noopener" class="btn btn-ghost">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none"
+               stroke="currentColor" stroke-width="2.2"
+               stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <rect x="2" y="3" width="20" height="14" rx="2"/>
+            <line x1="8" y1="21" x2="16" y2="21"/>
+            <line x1="12" y1="17" x2="12" y2="21"/>
+          </svg>
+          Abrir versión web
+        </a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+
+    <section class="section" id="destacado">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Funciones</span>
+          <h2 class="section-title">Lo más destacado</h2>
+          <p class="section-sub">Todo lo que necesitas para comunicarte, en una sola app.</p>
+        </div>
+
+        <div class="featured-grid reveal-stagger">
+          <article class="featured-card">
+            <div class="featured-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"/></svg>
+            </div>
+            <h3>Chats en tiempo real</h3>
+            <p>Conversaciones fluidas y sin demoras con todos tus contactos, individuales o en grupo.</p>
+          </article>
+
+          <article class="featured-card">
+            <div class="featured-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" ry="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4"/></svg>
+            </div>
+            <h3>Caja fuerte</h3>
+            <p>Comparte archivos de hasta 200 MB de forma privada, sin que aparezcan en el chat.</p>
+          </article>
+
+          <article class="featured-card">
+            <div class="featured-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M12 3l1.9 5.6L19 10.5l-5.1 1.9L12 18l-1.9-5.6L5 10.5l5.1-1.9z"/></svg>
+            </div>
+            <h3>Niggi (IA) con Gemini</h3>
+            <p>Asistente inteligente integrado con Gemini 3.1 flash lite. Gratis y disponible en todo momento.</p>
+          </article>
+
+          <article class="featured-card">
+            <div class="featured-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/><circle cx="12" cy="7" r="4"/></svg>
+            </div>
+            <h3>Perfiles de usuario</h3>
+            <p>Personaliza tu perfil y comparte tus rachas con quien tú quieras, cuando tú quieras.</p>
+          </article>
+
+          <article class="featured-card">
+            <div class="featured-icon" aria-hidden="true">
+              <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="3"/><path d="M19.4 15a1.65 1.65 0 0 0 .33 1.82l.06.06a2 2 0 1 1-2.83 2.83l-.06-.06a1.65 1.65 0 0 0-1.82-.33 1.65 1.65 0 0 0-1 1.51V21a2 2 0 1 1-4 0v-.09A1.65 1.65 0 0 0 9 19.4a1.65 1.65 0 0 0-1.82.33l-.06.06a2 2 0 1 1-2.83-2.83l.06-.06a1.65 1.65 0 0 0 .33-1.82 1.65 1.65 0 0 0-1.51-1H3a2 2 0 1 1 0-4h.09A1.65 1.65 0 0 0 4.6 9a1.65 1.65 0 0 0-.33-1.82l-.06-.06a2 2 0 1 1 2.83-2.83l.06.06a1.65 1.65 0 0 0 1.82.33H9a1.65 1.65 0 0 0 1-1.51V3a2 2 0 1 1 4 0v.09a1.65 1.65 0 0 0 1 1.51 1.65 1.65 0 0 0 1.82-.33l.06-.06a2 2 0 1 1 2.83 2.83l-.06.06a1.65 1.65 0 0 0-.33 1.82V9a1.65 1.65 0 0 0 1.51 1H21a2 2 0 1 1 0 4h-.09a1.65 1.65 0 0 0-1.51 1z"/></svg>
+            </div>
+            <h3>Gestión de cuentas</h3>
+            <p>Control total sobre tu cuenta: ajustes, privacidad y exportación de datos.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="novedades">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Novedades</span>
+          <h2 class="section-title">Nueva versión 3.5</h2>
+          <p class="section-sub">Más control, más privacidad y una interfaz completamente renovada.</p>
+        </div>
+
+        <div class="v35-wrap reveal">
+          <span class="v35-badge">
+            <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 2l1.8 5.6L19 9.5l-5.2 1.9L12 17l-1.8-5.6L5 9.5l5.2-1.9z"/></svg>
+            v3.5 · Disponible ahora
+          </span>
+          <p class="v35-lead">
+            Hemos rediseñado la experiencia desde dentro. Estas son las principales
+            novedades de esta actualización.
+          </p>
+
+          <div class="v35-grid reveal-stagger">
+            <div class="v35-item">
+              <span class="v35-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><line x1="12" y1="20" x2="12" y2="10"/><line x1="18" y1="20" x2="18" y2="4"/><line x1="6" y1="20" x2="6" y2="16"/></svg>
+              </span>
+              <div>
+                <h4>Centro de datos</h4>
+                <p>Exporta tus chats y accede a toda tu información desde un solo lugar.</p>
+              </div>
+            </div>
+
+            <div class="v35-item">
+              <span class="v35-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10"/><path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/><line x1="12" y1="17" x2="12.01" y2="17"/></svg>
+              </span>
+              <div>
+                <h4>Centro de ayuda</h4>
+                <p>Soporte y guías integradas para resolver cualquier duda sin salir de la app.</p>
+              </div>
+            </div>
+
+            <div class="v35-item">
+              <span class="v35-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/><line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/><line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/></svg>
+              </span>
+              <div>
+                <h4>Compartir perfiles y rachas</h4>
+                <p>Nuevas formas de compartir tu perfil y presumir de tu racha con amigos.</p>
+              </div>
+            </div>
+
+            <div class="v35-item">
+              <span class="v35-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M8.5 14.5A2.5 2.5 0 0 0 11 12c0-1.38-.5-2-1-3-1.072-2.143-.224-4.054 2-6 .5 2.5 2 4.9 4 6.5 2 1.6 3 3.5 3 5.5a7 7 0 1 1-14 0c0-1.153.433-2.294 1-3a2.5 2.5 0 0 0 2.5 2.5z"/></svg>
+              </span>
+              <div>
+                <h4>Sistema de rachas mejorado</h4>
+                <p>Rachas renovadas con mejor seguimiento, recompensas y notificaciones.</p>
+              </div>
+            </div>
+
+            <div class="v35-item">
+              <span class="v35-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/></svg>
+              </span>
+              <div>
+                <h4>Nuevas opciones de mensajes</h4>
+                <p>Más control sobre cómo envías, editas y gestionas tus mensajes.</p>
+              </div>
+            </div>
+
+            <div class="v35-item">
+              <span class="v35-ico" aria-hidden="true">
+                <svg viewBox="0 0 24 24"><circle cx="13.5" cy="6.5" r=".5"/><circle cx="17.5" cy="10.5" r=".5"/><circle cx="8.5" cy="7.5" r=".5"/><circle cx="6.5" cy="12.5" r=".5"/><path d="M12 2C6.5 2 2 6.5 2 12s4.5 10 10 10c.926 0 1.648-.746 1.648-1.688 0-.437-.18-.835-.437-1.125-.29-.289-.438-.652-.438-1.125a1.64 1.64 0 0 1 1.668-1.668h1.996c3.051 0 5.555-2.503 5.555-5.554C21.965 6.012 17.461 2 12 2z"/></svg>
+              </span>
+              <div>
+                <h4>Interfaz renovada</h4>
+                <p>Diseño más limpio, fluido y consistente en toda la aplicación.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="descargar">
+      <div class="container">
+        <div class="section-head reveal">
+          <span class="eyebrow">Descargar</span>
+          <h2 class="section-title">Elige cómo usar Fluyt</h2>
+          <p class="section-sub">
+            Instala el APK en tu Android o abre la versión web de escritorio en tu portátil.
+          </p>
+        </div>
+
+        <div class="download-grid reveal-stagger">
+          <a href="/descargas/fluyt.apk" class="dl-card dl-android" download>
+            <span class="dl-tag">v3.5</span>
+            <div class="dl-head">
+              <div class="dl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="5" y="2" width="14" height="20" rx="2.5"/>
+                  <line x1="11" y1="18" x2="13" y2="18"/>
+                </svg>
+              </div>
+              <div>
+                <div class="dl-title">Android</div>
+                <div class="dl-sub">APK · Android 6+</div>
+              </div>
+            </div>
+            <p class="dl-desc">
+              Descarga la app oficial en formato APK y disfruta de Fluyt en tu móvil,
+              con todas las novedades de la versión 3.5.
+            </p>
+            <span class="dl-cta">
+              Descargar APK
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </a>
+
+          <a href="https://fluyt.netlify.app" target="_blank" rel="noopener" class="dl-card dl-web">
+            <span class="dl-tag">Web</span>
+            <div class="dl-head">
+              <div class="dl-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                     stroke-width="2" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                  <rect x="2" y="3" width="20" height="14" rx="2"/>
+                  <line x1="8" y1="21" x2="16" y2="21"/>
+                  <line x1="12" y1="17" x2="12" y2="21"/>
+                </svg>
+              </div>
+              <div>
+                <div class="dl-title">Escritorio web</div>
+                <div class="dl-sub">fluyt.netlify.app</div>
+              </div>
+            </div>
+            <p class="dl-desc">
+              Usa Fluyt directamente desde el navegador en Windows, macOS o Linux.
+              Sin instalaciones, siempre actualizado.
+            </p>
+            <span class="dl-cta">
+              Abrir versión web
+              <svg width="14" height="14" viewBox="0 0 24 24" fill="none"
+                   stroke="currentColor" stroke-width="2.5"
+                   stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+                <line x1="5" y1="12" x2="19" y2="12"/>
+                <polyline points="12 5 19 12 12 19"/>
+              </svg>
+            </span>
+          </a>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer-brand">
+        <img src="./assets/img/fluyt.png" alt="Fluyt">
+        <span>© 2026 Fluyt · aXolotl Team</span>
+      </div>
+      <div class="footer-links">
+        <a href="mailto:axolotlteamapp@gmail.com">Contacto</a>
+        <a href="https://ko-fi.com/axolotl_team" target="_blank" rel="noopener">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/></svg>
+          Donar
+        </a>
+        <a href="https://fluyt.netlify.app" target="_blank" rel="noopener">Versión web</a>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const progress = document.querySelector('.progress');
+    const onScrollProgress = () => {
+      const doc = document.documentElement;
+      const max = doc.scrollHeight - doc.clientHeight;
+      const pct = max > 0 ? (doc.scrollTop / max) * 100 : 0;
+      progress.style.width = pct + '%';
+    };
+    window.addEventListener('scroll', onScrollProgress, { passive: true });
+    onScrollProgress();
+
+    const nav = document.querySelector('.nav');
+    const hero = document.querySelector('.hero');
+    const navObserver = new IntersectionObserver(
+      ([entry]) => nav.classList.toggle('visible', !entry.isIntersecting),
+      { threshold: 0.05 }
+    );
+    navObserver.observe(hero);
+
+    const revealObserver = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('visible');
+            revealObserver.unobserve(entry.target);
+          }
+        });
+      },
+      { threshold: 0.14, rootMargin: '0px 0px -40px 0px' }
+    );
+    document.querySelectorAll('.reveal, .reveal-stagger').forEach((el) =>
+      revealObserver.observe(el)
+    );
+
+    document.querySelectorAll('.featured-card').forEach((card) => {
+      card.addEventListener('mousemove', (e) => {
+        const rect = card.getBoundingClientRect();
+        card.style.setProperty('--mx', e.clientX - rect.left + 'px');
+        card.style.setProperty('--my', e.clientY - rect.top + 'px');
+      });
+    });
+
+    hero.addEventListener('mousemove', (e) => {
+      const rect = hero.getBoundingClientRect();
+      hero.style.setProperty('--cx', e.clientX - rect.left + 'px');
+      hero.style.setProperty('--cy', e.clientY - rect.top + 'px');
+    });
+
+    document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+      anchor.addEventListener('click', (e) => {
+        const href = anchor.getAttribute('href');
+        if (!href || href === '#' || href.length < 2) return;
+        const target = document.querySelector(href);
+        if (target) {
+          e.preventDefault();
+          target.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+      });
+    });
+  </script>
+</body>
+</html>
