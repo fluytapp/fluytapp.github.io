@@ -1,0 +1,15 @@
+
+[
+  {
+    "relation": [
+      "delegate_permission/common.handle_all_urls"
+    ],
+    "target": {
+      "namespace": "android_app",
+      "package_name": "com.fluyt.app",
+      "sha256_cert_fingerprints": [
+        "7C:63:9E:0C:BC:F0:E1:8A:1C:01:F2:51:24:AD:17:BF:C8:B6:AE:5F:7B:DA:7D:2B:78:3C:D1:3E:16:BA:DF:9C"
+      ]
+    }
+  }
+]
